@@ -430,7 +430,12 @@ variable "alb_zone_id" {
 }
 
 variable "alb_settings_override" {
-  type        = list(string)
+  type = list(object({
+    namespace = string
+    name      = string
+    value     = string
+  }))
+
   default     = []
   description = "Override default settings of ALB"
 }
