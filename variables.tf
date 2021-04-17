@@ -429,6 +429,12 @@ variable "alb_zone_id" {
   description = "ALB zone id"
 }
 
+variable "alb_settings_override" {
+  type        = list(string)
+  default     = []
+  description = "Override default settings of ALB"
+}
+
 variable "ami_id" {
   type        = string
   default     = null
