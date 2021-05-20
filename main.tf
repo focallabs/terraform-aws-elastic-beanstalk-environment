@@ -427,7 +427,7 @@ locals {
     {
       namespace = "aws:elbv2:loadbalancer"
       name      = "LoadBalancerIsShared"
-      value     = var.loadbalancer_type == "application" && var.alb_shared_arn ? true : false,
+      value     = var.loadbalancer_type == "application" && var.alb_shared_arn != "" ? true : false,
     },
     {
       namespace = "aws:elbv2:listener:default"
