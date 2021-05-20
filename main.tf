@@ -408,7 +408,7 @@ locals {
     {
       namespace = "aws:elbv2:loadbalancer"
       name      = "AccessLogsS3Enabled"
-      value     = var.enable_elb_logs ? "true" : "false"
+      value     = var.enable_elb_logs ? true : false
     },
     {
       namespace = "aws:elbv2:loadbalancer"
