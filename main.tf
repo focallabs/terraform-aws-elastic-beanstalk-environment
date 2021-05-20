@@ -407,11 +407,6 @@ locals {
   alb_defaul_settings = [
     {
       namespace = "aws:elbv2:loadbalancer"
-      name      = "AccessLogsS3Enabled"
-      value     = var.enable_elb_logs ? true : false
-    },
-    {
-      namespace = "aws:elbv2:loadbalancer"
       name      = "SharedLoadBalancer"
       value     = var.loadbalancer_type == "application" ? var.alb_shared_arn : ""
     },
@@ -454,6 +449,11 @@ locals {
 
   # Only declare AccessLogsS3Bucket if enable_elb_logs = true
   alb_settings = var.enable_elb_logs ? concat(local.alb_defaul_settings, [
+    {
+      namespace = "aws:elbv2:loadbalancer"
+      name      = "AccessLogsS3Enabled"
+      value     = "true"
+    },
     {
       namespace = "aws:elbv2:loadbalancer"
       name      = "AccessLogsS3Bucket"
