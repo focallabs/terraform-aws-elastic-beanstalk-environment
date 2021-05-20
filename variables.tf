@@ -359,6 +359,12 @@ variable "elb_scheme" {
   description = "Specify `internal` if you want to create an internal load balancer in your Amazon VPC so that your Elastic Beanstalk application cannot be accessed from outside your Amazon VPC"
 }
 
+variable "alb_shared_arn" {
+  type        = string
+  default     = ""
+  description = "Specify the application load balancer ARN that you want to share between multiple environments"
+}
+
 variable "ssh_source_restriction" {
   type        = string
   default     = "0.0.0.0/0"

@@ -342,7 +342,6 @@ locals {
       name      = "ManagedSecurityGroup"
       value     = var.loadbalancer_managed_security_group
     },
-
     {
       namespace = "aws:elb:listener"
       name      = "ListenerProtocol"
@@ -426,6 +425,11 @@ locals {
       value     = var.loadbalancer_managed_security_group
     },
     {
+      namespace = "aws:elbv2:loadbalancer"
+      name      = "LoadBalancerIsShared"
+      value     = var.loadbalancer_type == "application" && var.alb_shared_arn ? true : false,
+    },
+    {
       namespace = "aws:elbv2:listener:default"
       name      = "ListenerEnabled"
       value     = var.http_listener_enabled || var.loadbalancer_certificate_arn == "" ? "true" : "false"
@@ -449,7 +453,7 @@ locals {
       namespace = "aws:elbv2:listener:443"
       name      = "SSLPolicy"
       value     = var.loadbalancer_type == "application" ? var.loadbalancer_ssl_policy : ""
-    }
+    },
   ]
 
   generic_elb_settings = [
