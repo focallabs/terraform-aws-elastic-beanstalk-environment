@@ -416,6 +416,11 @@ locals {
     },
     {
       namespace = "aws:elbv2:loadbalancer"
+      name      = "SharedLoadBalancer"
+      value     = var.loadbalancer_type == "application" ? var.alb_shared_arn : ""
+    },
+    {
+      namespace = "aws:elbv2:loadbalancer"
       name      = "SecurityGroups"
       value     = join(",", sort(var.loadbalancer_security_groups))
     },
@@ -423,11 +428,6 @@ locals {
       namespace = "aws:elbv2:loadbalancer"
       name      = "ManagedSecurityGroup"
       value     = var.loadbalancer_managed_security_group
-    },
-    {
-      namespace = "aws:elbv2:loadbalancer"
-      name      = "LoadBalancerIsShared"
-      value     = var.loadbalancer_type == "application" && var.alb_shared_arn != "" ? true : false,
     },
     {
       namespace = "aws:elbv2:listener:default"
@@ -462,7 +462,6 @@ locals {
       name      = "ELBSubnets"
       value     = join(",", sort(var.loadbalancer_subnets))
     },
-
     {
       namespace = "aws:ec2:vpc"
       name      = "ELBScheme"
@@ -472,6 +471,11 @@ locals {
       namespace = "aws:elasticbeanstalk:environment"
       name      = "LoadBalancerType"
       value     = var.loadbalancer_type
+    },
+    {
+      namespace = "aws:elasticbeanstalk:environment"
+      name      = "LoadBalancerIsShared"
+      value     = var.loadbalancer_type == "application" && var.alb_shared_arn != "" ? true : false,
     },
 
     ###===================== Application Load Balancer Health check settings =====================================================###
